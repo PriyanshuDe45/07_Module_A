@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color Wheel</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+<div class="cw-wrap">
+  <div class="cw-canvas-wrap">
+    <canvas id="wheel" width="280" height="280"></canvas>
+    <div class="cw-marker" id="marker"></div>
+  </div>
+
+  <div class="cw-controls">
+    <div class="cw-row">
+      <label class="cw-label" for="brightness">Brightness</label>
+      <input type="range" id="brightness" min="0" max="100" value="100" step="1">
+      <span class="cw-bval" id="bval">100%</span>
+    </div>
+
+    <div class="cw-result-box">
+      <div class="cw-swatch" id="swatch"></div>
+      <span class="cw-hex" id="hexout">—</span>
+    </div>
+
+    <p class="cw-hint" id="hint">Click the color wheel to pick a color</p>
+  </div>
+</div>
+
+<script src="./script.js"></script>
+
+</body>
+</html>
