@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard Layout</title>
+    <link rel="stylesheet" href="./default.css">
+    <link rel="stylesheet" href="./your-work.css">
+</head>
+<body>
+<header>
+    <div class="logo"></div>
+</header>
+<main>
+    <aside>
+
+    </aside>
+
+    <div class="section-wrapper">
+
+        <section class="section-1">
+        </section>
+
+        <section class="section-2">
+
+            <div class="list-box">
+                <div class="list-wrapper">
+                    <div class="list-item">
+                        <div class="dummy-content"></div>
+                    </div>
+                    <!-- some more dummy list item -->
+                </div>
+            </div>
+
+        </section>
+
+        <section class="section-3">
+
+            <div class="list-box">
+                <div class="list-wrapper">
+                    <div class="list-item">
+                        <div class="dummy-content"></div>
+                    </div>
+                    <!-- some more dummy list item -->
+                </div>
+            </div>
+
+        </section>
+
+        <section class="section-4">
+
+            <div class="list-box">
+                <div class="list-wrapper">
+                    <div class="list-item">
+                        <div class="dummy-content"></div>
+                    </div>
+                    <!-- some more dummy list item -->
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+</main>
+
+<script>
+
+    const $wrappers = document.querySelectorAll(".list-wrapper");
+    $wrappers.forEach($wrapper => {
+        // language=HTML
+        $wrapper.innerHTML = `<div class="list-item"><div class="dummy-content"></div></div>`.repeat(20);
+    })
+
+</script>
+</body>
+</html>
