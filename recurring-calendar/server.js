@@ -12,5 +12,20 @@ mongoose.connect('mongodb://localhost:27017/calendar');
 const Schedule = mongoose.model('Schedule', new mongoose.Schema({
     title: String,
     date: String, 
-    
-}))
+    isRecurring: Boolean,
+    type: String,
+    cycle: Number,
+    endDate: Date
+}));
+
+//Recurrence
+function getOccurences(s,year,month){
+    const results = [];
+    const start = new Date(s.taskDate);
+    const mStart = new Date(year, month,1 );
+    const mEnd = new  Date(year, month +1,0);
+
+    if(!s.isRecurring){
+        if(is)
+    }
+}
