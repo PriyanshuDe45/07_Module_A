@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Digital Display Board</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <style>
+    
+  </style>
+</head>
+<body>
+  <div>
+    <input id="txt" type="text" value="TEST🎶" maxlength="40">
+    <button onclick="restart()">Apply</button>
+  </div>
+  <canvas id="board" width="700" height="100"></canvas>
+
+  <script>
+    const GAP = 8, FONT_SIZE = 68, DOT_R = 3, SPEED = 2;
+    const DOT_COLOR = '#2266dd';
+    const board = document.getElementById('board');
+    const ctx = board.getContext('2d');
+
+    let dots = [], dotWidth = 0, offsetX = board.width;
+
+    function buildDots(text) {
+      const off = document.createElement('canvas');
+      off.width = text.length * FONT_SIZE + 200;
+      off.height = board.height;
+      const oc = off.getContext('2d');
+      oc.font = `bold ${FONT_SIZE}px sans-serif`;
+      oc.textBaseline = 'top';
+      oc.fillStyle = '#fff';
+      oc.fillText(text, 4, 12);
+
+      const w = Math.ceil(oc.measureText(text).width) + 20;
+      const { data } = oc.getImageData(0, 0, off.width, board.height);
+      dots = [];
+      for (let y = 0; y < board.height; y += GAP)
+        for (let x = 0; x < w; x += GAP)
+          if (data[(y * off.width + x) * 4 + 3] > 80)
+            dots.push({ x, y });
+      dotWidth = w;
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, board.width, board.height);
+      ctx.fillStyle = DOT_COLOR;
+      for (const d of dots) {
+        ctx.beginPath();
+        ctx.arc(d.x + offsetX, d.y + DOT_R, DOT_R, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      offsetX -= SPEED;
+      if (offsetX + dotWidth < 0) offsetX = board.width;
+      requestAnimationFrame(draw);
+    }
+
+    function restart() {
+      buildDots(document.getElementById('txt').value || 'Hello');
+      offsetX = board.width;
+    }
+
+    restart();
+    draw();
+  </script>
+</body>
+</html>

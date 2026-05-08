@@ -74,7 +74,7 @@ input{
     transition:0.3s;
 }
 
-
+/* Active dot */
 #slide1:checked ~ .carousel .navigation label:nth-child(1),
 #slide2:checked ~ .carousel .navigation label:nth-child(2),
 #slide3:checked ~ .carousel .navigation label:nth-child(3){

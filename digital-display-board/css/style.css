@@ -1,0 +1,21 @@
+body { 
+    background: #ffffff; 
+    display: flex; 
+    flex-direction: column;
+           
+    align-items: center; 
+    padding: 2rem; 
+    font-family: sans-serif; 
+}
+    
+input, button { 
+    font-size: 16px; 
+    padding: 8px 12px; 
+    margin: 4px; 
+}
+    
+#board { 
+    background: #000; 
+    border-radius: 8px; 
+    margin-top: 1rem; 
+}
