@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Loading Animation</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 300px;
+            height: 300px;
+            position: relative;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+            animation: spinSm 2s 1s ease infinite;
+
+
+            .bar {
+                position: absolute;
+                border: 5px solid white;
+                background: black;
+                animation: spin 2s 1s ease infinite;
+
+                &:nth-child(1) {
+                    top: 40px;
+                    left: 0;
+                    right: 0;
+                    height: 20px;
+                    
+                }
+                &:nth-child(2) {
+                    top: 0;
+                    bottom: 0;
+                    right: 40px;
+                    width: 20px;
+                    
+                }
+                &:nth-child(3) {
+                    bottom: 40px;
+                    left: 0;
+                    right: 0;
+                    height: 20px;
+                    
+                }
+                &:nth-child(4) {
+                    top: 0;
+                    bottom: 0;
+                    left: 40px;
+                    width: 20px;
+                    
+                }
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                rotate: 0deg;
+            }
+            100% {
+                rotate: 180deg;
+            }
+        }
+        @keyframes spinSm {
+            0% {
+                transform: rotateZ(0deg);
+            }
+            100% {
+                transform: rotateZ(90deg);
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+</div>
+
+</body>
+</html>

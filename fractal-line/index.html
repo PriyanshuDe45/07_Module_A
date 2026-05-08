@@ -1,105 +1,51 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>Fractal Line</title>
-<style>
-  body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    background: #d0d0d0;
-    font-family: Arial, sans-serif;
-  }
-  canvas {
-    background: #fff;
-    display: block;
-    flex-shrink: 0;
-  }
-  #controls {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 10px;
-    gap: 6px;
-  }
-  input[type="number"] {
-    width: 80px;
-    font-size: 14px;
-    padding: 2px 4px;
-  }
-  button {
-    font-size: 14px;
-    padding: 2px 10px;
-    cursor: pointer;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fractal Line</title>
 </head>
 <body>
+    <canvas></canvas>
+    <input type="number" name="depth-input" id="depth-input">
+    <button id="drawBtn">Draw</button>
 
-<canvas id="c"></canvas>
+    <script>
 
-<div id="controls">
-  <input type="number" id="n" value="2" min="1" />
-  <button onclick="draw()">Draw</button>
-</div>
+        const canvas = document.querySelector('canvas');
+        const depthInput = document.querySelector('#depth-input');
+        const drawBtn = document.querySelector('#drawBtn');
+        const ctx = canvas.getContext('2d');
+        const w = 600;
+        const h = 600;
+        canvas.width = w;
+        canvas.height = h;
+        const sqrt2 = Math.sqrt(2);
 
-<script>
+        const drawFractalLine = (depth, x, y, l, flag) => {
+            if (depth <= 0) return;
+            ctx.strokeStyle = 'black'
+            ctx.beginPath();
+            const startX = flag === 'h' ? x - l/sqrt2 : x;
+            const startY = flag === 'v' ? y - l/sqrt2 : y;
+            const endX = flag === 'h' ? x + l/sqrt2 : x;
+            const endY = flag === 'v' ? y + l/sqrt2 : y;
+            ctx.moveTo(startX, startY);
+            ctx.lineTo(endX, endY);
+            ctx.closePath();
+            ctx.stroke()
+            drawFractalLine(depth-1, startX, startY, l/sqrt2, flag === 'v' ? 'h' : 'v');
+            drawFractalLine(depth-1, endX, endY, l/sqrt2, flag === 'v' ? 'h' : 'v');
+        }
 
-const canvas = document.getElementById('c');
-const ctx = canvas.getContext('2d');
+        drawBtn.addEventListener('click', () => {
+            ctx.clearRect(0, 0, w, h);
+            drawFractalLine(depthInput.value, w/2, h/2, w, 'h')
+        })
+        drawFractalLine(10, w/2, h/2, w/2, 'h')
 
-
-const W = Math.floor(window.innerWidth * 0.76);
-const H = window.innerHeight;
-canvas.width  = W;
-canvas.height = H;
-
-function fractal(x, y, w, h, depth) {
-  if (depth <= 1) return;
-
-  const my = y + h / 2;
-  const lx = x + w / 3;
-  const rx = x + w * 2 / 3;
-
-
-  ctx.beginPath();
-  ctx.moveTo(x, my);
-  ctx.lineTo(x + w, my);
-  ctx.stroke();
-
-
-  if (depth >= 3) {
-    ctx.beginPath();
-    ctx.moveTo(lx, y);
-    ctx.lineTo(lx, y + h);
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.moveTo(rx, y);
-    ctx.lineTo(rx, y + h);
-    ctx.stroke();
-  }
-
-  const hw = w / 2;
-  const hh = h / 2;
-  fractal(x,      y,      hw, hh, depth - 1);
-  fractal(x + hw, y,      hw, hh, depth - 1);
-  fractal(x,      y + hh, hw, hh, depth - 1);
-  fractal(x + hw, y + hh, hw, hh, depth - 1);
-}
-
-function draw() {
-  const n = Math.max(1, parseInt(document.getElementById('n').value) || 1);
-  ctx.clearRect(0, 0, W, H);
-  ctx.strokeStyle = '#333';
-  ctx.lineWidth = 1;
-  fractal(0, 0, W, H, n);
-}
-
-draw();
-</script>
+    </script>
 </body>
 </html>

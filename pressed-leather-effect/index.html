@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Pressed Logo Effect</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+<h2>Pressed Leather Effect — Preview</h2>
+
+<div class="scene" id="scene">
+  <img class="leather" id="leatherImg" src="./media/asset.jpg" alt="leather">
+
+  <!-- Shadow (depth illusion) -->
+  <div class="shadow-layer">
+    <img id="shadowImg" src="./media/logo.png" alt="">
+  </div>
+
+  <!-- Main logo blended into leather -->
+  <div class="logo-layer">
+    <img id="logoImg" src="./media/logo.png" alt="logo">
+  </div>
+
+  <!-- Highlight -->
+  <div class="highlight-layer">
+    <img id="hlImg" src="./media/logo.png" alt="">
+  </div>
+</div>
+
+
+<div id="status"></div>
+<script src="./script.js"></script>
+</body>
+</html>
