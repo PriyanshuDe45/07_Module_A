@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Image Mosaic API</title>
+  <style>
+    body { font-family: sans-serif; max-width: 700px; margin: 40px auto; padding: 0 20px; color: #222; }
+    h1 { font-size: 1.5rem; border-bottom: 2px solid #000; padding-bottom: 8px; }
+    h2 { font-size: 1rem; margin-top: 28px; }
+    code { background: #f0f0f0; padding: 2px 6px; border-radius: 4px; font-size: 0.9rem; }
+    pre { background: #f0f0f0; padding: 12px; border-radius: 6px; overflow-x: auto; }
+    table { border-collapse: collapse; width: 100%; margin-top: 8px; }
+    td, th { border: 1px solid #ddd; padding: 8px 12px; text-align: left; font-size: 0.9rem; }
+    th { background: #f7f7f7; }
+  </style>
+</head>
+<body>
+
+  <h1>Image Mosaic API</h1>
+  <p>Express server that returns a pixelated mosaic version of any image in the <code>resource/</code> folder.</p>
+
+  <h2>Setup</h2>
+  <pre>npm install
+mkdir resource
+# drop your images into ./resource/
+node server.js</pre>
+
+  <h2>Endpoint</h2>
+  <pre>GET http://localhost:3004/mosaic</pre>
+
+  <h2>Query Parameters</h2>
+  <table>
+    <tr><th>Param</th><th>Default</th><th>Description</th></tr>
+    <tr><td><code>image</code></td><td><code>original.jpg</code></td><td>Filename inside <code>resource/</code></td></tr>
+    <tr><td><code>cell_size</code></td><td><code>50</code></td><td>Size of each mosaic cell in px</td></tr>
+  </table>
+
+  <h2>📬 Example URLs</h2>
+  <pre>http://localhost:3000/mosaic
+http://localhost:3000/mosaic?cell_size=20
+http://localhost:3000/mosaic?image=sample.png&cell_size=30</pre>
+
+
+</body>
+</html>

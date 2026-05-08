@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:8px}
+.col{display:flex;flex-direction:column;gap:8px}
+img{width:100%;display:block}
+</style>
+</head>
+<body>
+<div id="gallery">
+  <div class="col" id="c0"></div>
+  <div class="col" id="c1"></div>
+  <div class="col" id="c2"></div>
+  <div class="col" id="c3"></div>
+  <div id="sentinel"></div>
+</div>
+<script>
+var images=[];
+for(var i=1;i<=100;i++) images.push("images/"+i+".jpg");
+
+var heights=[0,0,0,0],next=0;
+var cols=[c0,c1,c2,c3];
+
+function shortest(){
+  var m=Infinity,idx=0;
+  for(var i=0;i<4;i++) if(heights[i]<m){m=heights[i];idx=i;}
+  return idx;
+}
+
+function load(){
+  if(next>=images.length)return;
+  var end=Math.min(next+10,images.length);
+  for(var i=next;i<end;i++){
+    var img=document.createElement('img');
+    img.src=images[i];
+    img.onload=function(){
+      var c=shortest();
+      cols[c].appendChild(this);
+      heights[c]+=this.naturalHeight*(cols[c].offsetWidth/this.naturalWidth)+8;
+      check();
+    };
+  }
+  next=end;
+}
+
+function check(){
+  if(next>=images.length)return;
+  var r=sentinel.getBoundingClientRect();
+  if(r.top<window.innerHeight) load();
+}
+
+new IntersectionObserver(function(e){
+  if(e[0].isIntersecting) load();
+}).observe(sentinel);
+
+load();
+</script>
+</body>
+</html>
