@@ -10,7 +10,7 @@
 
   .container { display: flex; gap: 20px; max-width: 1100px; margin: auto; }
 
-  /* ── LEFT PANEL ── */
+ 
   .left { width: 280px; flex-shrink: 0; }
 
   .card { background: #fff; border-radius: 8px; padding: 16px;
@@ -30,7 +30,6 @@
            border: none; border-radius: 5px; cursor: pointer; font-size: 14px; }
   button:hover { background: #3a57d4; }
 
-  /* ── CALENDAR ── */
   .right { flex: 1; }
 
   .cal-header { display: flex; align-items: center; justify-content: space-between;
@@ -177,7 +176,7 @@ async function loadCalendar() {
   document.getElementById('gotoYear').value  = year;
   document.getElementById('gotoMonth').value = month;
 
-  const res    = await fetch(`/api/schedules?year=${year}&month=${month}`);
+  const res    = await fetch(`http://localhost:3000/api/schedules?year=${year}&month=${month}`);
   const events = await res.json();
 
   // Group events by day
@@ -237,7 +236,7 @@ async function addSchedule() {
     body.endDate = end;
   }
 
-  await fetch('/api/schedules', {
+  await fetch('http://localhost:3000/api/schedules', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body)

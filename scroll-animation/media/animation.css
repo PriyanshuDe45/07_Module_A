@@ -1,3 +1,74 @@
 /********************************/
 /* Please write your code here. */
 /********************************/
+
+
+#section1 .box {
+    position: sticky;
+    top: calc(50vh - 200px);
+
+    animation: box-shrink linear both;
+    animation-timeline: scroll(root);
+    animation-range: 25% 65%;
+}
+
+@keyframes box-shrink {
+    from {
+        width: 100%;
+        height: 400px;
+    }
+    to {
+        width: 0%;
+        height: 0px;
+        overflow: hidden;
+    }
+}
+
+#section1 .box .text {
+    animation: text-fade linear both;
+    animation-timeline: scroll(root);
+    animation-range: 25% 55%;
+}
+
+@keyframes text-fade {
+    from { opacity: 1; transform: scale(1); }
+    to   { opacity: 0; transform: scale(0.6); }
+}
+
+
+#section2 {
+    
+    height: 300vh;
+}
+
+#section2 .item {
+    position: sticky;
+    top: 0;
+
+    animation: horizontal-scroll linear both;
+    animation-timeline: scroll(root);
+    animation-range: entry 0% exit 100%;
+}
+
+@keyframes horizontal-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-66.6667%); } 
+}
+
+
+#section3 .box {
+    animation: section3-reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 40%;
+}
+
+@keyframes section3-reveal {
+    from {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
